@@ -14,7 +14,7 @@ public class CredentialServiceImpl implements CredentialService {
 
     @Override
     public Credentials getCredentials() {
-        credentials = credentials!= null? credentials : Credentials.create(privateKey);
+        credentials = credentials != null ? credentials : Credentials.create(privateKey);
         return credentials;
     }
 }
