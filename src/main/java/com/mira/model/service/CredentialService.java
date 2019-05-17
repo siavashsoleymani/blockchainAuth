@@ -1,4 +1,4 @@
-package com.mira.services;
+package com.mira.model.service;
 
 import org.web3j.crypto.Credentials;
 

@@ -1,4 +1,4 @@
-package com.mira.services;
+package com.mira.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.web3j.protocol.Web3j;

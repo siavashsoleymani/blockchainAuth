@@ -1,6 +1,6 @@
-package com.mira.services.impl;
+package com.mira.model.service.impl;
 
-import com.mira.services.CredentialService;
+import com.mira.model.service.CredentialService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.web3j.crypto.Credentials;

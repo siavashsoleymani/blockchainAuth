@@ -1,4 +1,4 @@
-package com.mira.model;
+package com.mira.model.entity;
 
 public class User {
     private String name;

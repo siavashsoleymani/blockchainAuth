@@ -1,11 +1,11 @@
-package com.mira.services.impl;
+package com.mira.model.service.impl;
 
 import com.machinezoo.sourceafis.FingerprintMatcher;
 import com.machinezoo.sourceafis.FingerprintTemplate;
 import com.mira.contracts.Users;
 import com.mira.exception.UserAlreadyExistException;
-import com.mira.model.User;
-import com.mira.services.ContractService;
+import com.mira.model.entity.User;
+import com.mira.model.service.ContractService;
 import com.mira.util.Encryptor;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,9 +63,7 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         return encryptor.decryptUser(encryptedUser, probe.serialize());
     }
 
-
-
-    private FingerprintTemplate getTemplateFromImage(MultipartFile image) throws Exception {
+    public FingerprintTemplate getTemplateFromImage(MultipartFile image) throws Exception {
         byte[] probeImage = image.getBytes();
         FingerprintTemplate probe = new FingerprintTemplate()
                 .dpi(400)

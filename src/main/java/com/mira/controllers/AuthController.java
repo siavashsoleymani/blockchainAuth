@@ -1,8 +1,8 @@
 package com.mira.controllers;
 
 import com.mira.exception.UserNotFoundException;
-import com.mira.model.User;
-import com.mira.services.impl.UsersServiceImpl;
+import com.mira.model.entity.User;
+import com.mira.model.service.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PostMapping;

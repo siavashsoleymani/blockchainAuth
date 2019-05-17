@@ -1,6 +1,6 @@
 package com.mira.util;
 
-import com.mira.model.User;
+import com.mira.model.entity.User;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
