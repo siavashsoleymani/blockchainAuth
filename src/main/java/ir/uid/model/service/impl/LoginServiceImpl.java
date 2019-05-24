@@ -32,7 +32,7 @@ public class LoginServiceImpl implements LoginService {
         if (Objects.isNull(byLid)) throw new NotFoundException("lid not found");
         User user = usersService.probeUser(file);
         if (Objects.isNull(user)) throw new UserNotFoundException(env.getProperty("usernotfound"));
-        String templateFromImage = usersService.getTemplateFromImage(file).serialize();
+        String templateFromImage = usersService.getTemplateFromKey(file).serialize();
         byLid.setUserId(templateFromImage);
         otqRepository.save(byLid);
         return user;

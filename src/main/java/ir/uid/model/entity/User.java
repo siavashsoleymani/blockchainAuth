@@ -3,14 +3,41 @@ package ir.uid.model.entity;
 public class User {
     private String name;
 
+    private String family;
+
     private String dob;
 
     private String sex;
+
+    private String key;
+
+
+    public User(String name, String dob, String sex, String key) {
+        this.name = name;
+        this.dob = dob;
+        this.sex = sex;
+    }
 
     public User(String name, String dob, String sex) {
         this.name = name;
         this.dob = dob;
         this.sex = sex;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getName() {
