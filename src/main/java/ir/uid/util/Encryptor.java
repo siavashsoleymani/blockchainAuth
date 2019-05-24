@@ -50,8 +50,7 @@ public class Encryptor {
         return DatatypeConverter.parseHexBinary(s);
     }
 
-    public User decryptUser(User encryptedUser, String image) throws Exception {
-        String key = generateKey(image);
+    public User decryptUser(User encryptedUser, String key) throws Exception {
         encryptedUser.setDob(this.decrypt(encryptedUser.getDob(), key));
         encryptedUser.setName(this.decrypt(encryptedUser.getName(), key));
         encryptedUser.setSex(this.decrypt(encryptedUser.getSex(), key));
@@ -59,20 +58,10 @@ public class Encryptor {
     }
 
 
-    public User encryptUserDatas(User user, String file) throws Exception {
-        String key = generateKey(file);
+    public User encryptUserDatas(User user, String key) throws Exception {
         user.setDob(this.encrypt(user.getDob(), key));
         user.setName(this.encrypt(user.getName(), key));
         user.setSex(this.encrypt(user.getSex(), key));
         return user;
-    }
-
-    private String generateKey(String file) throws IOException, NoSuchAlgorithmException {
-        String hash = hash(file);
-        return hash.subSequence(0, 16).toString();
-    }
-
-    private String hash(String text) throws NoSuchAlgorithmException {
-        return DigestUtils.sha256Hex(text);
     }
 }

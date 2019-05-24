@@ -18,7 +18,7 @@ public class AuthController {
     private Environment env;
 
     @PostMapping("verify")
-    public User verifyUser(@RequestParam("file") MultipartFile file) throws Exception {
+    public User verifyUser(@RequestParam("key") String file) throws Exception {
         User user = userSvc.probeUser(file);
         return user;
     }

@@ -27,13 +27,12 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public User loginUser(MultipartFile file, String lid) throws Exception {
+    public User loginUser(String key, String lid) throws Exception {
         OTQ    byLid             = otqRepository.findByLid(lid);
         if (Objects.isNull(byLid)) throw new NotFoundException("lid not found");
-        User user = usersService.probeUser(file);
+        User user = usersService.probeUser(key);
         if (Objects.isNull(user)) throw new UserNotFoundException(env.getProperty("usernotfound"));
-        String templateFromImage = usersService.getTemplateFromKey(file).serialize();
-        byLid.setUserId(templateFromImage);
+        byLid.setUserId(key);
         otqRepository.save(byLid);
         return user;
     }

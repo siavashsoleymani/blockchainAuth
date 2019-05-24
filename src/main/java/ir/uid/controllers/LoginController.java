@@ -1,5 +1,6 @@
 package ir.uid.controllers;
 
+import ir.uid.model.DTO.LidDTO;
 import ir.uid.model.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class LoginController {
@@ -21,9 +21,8 @@ public class LoginController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/users/login")
-    public ResponseEntity<String> loginUserToBusiness(@RequestBody MultipartFile file,
-                                                      String lid) throws Exception {
-        loginService.loginUser(file, lid);
+    public ResponseEntity<String> loginUserToBusiness(@RequestBody LidDTO lidDTO) throws Exception {
+        loginService.loginUser(lidDTO.getKey(), lidDTO.getLid());
         return new ResponseEntity<>("ok", HttpStatus.OK);
     }
 }

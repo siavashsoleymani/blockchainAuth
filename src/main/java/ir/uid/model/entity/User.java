@@ -24,6 +24,9 @@ public class User {
         this.sex = sex;
     }
 
+    public User() {
+    }
+
     public String getFamily() {
         return family;
     }

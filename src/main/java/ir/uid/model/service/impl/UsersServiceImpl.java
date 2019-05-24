@@ -21,6 +21,7 @@ import org.web3j.tuples.generated.Tuple3;
 
 import java.math.BigInteger;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 @Service
 public class UsersServiceImpl extends ContractService implements InitializingBean {
@@ -41,6 +42,8 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
     private final OTQRepository otqRepository;
 
     private final RestTemplate restTemplate;
+
+    private static final Predicate<Tuple3<String, String, String>> isNull = p -> !p.getValue1().isEmpty() || !p.getValue1().isEmpty() || !p.getValue3().isEmpty();
 
     @Autowired
     public UsersServiceImpl(Encryptor encryptor,
@@ -77,7 +80,7 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
     private User getMatchedUserUsingMatcher(String key) throws Exception {
         User                           user;
         Tuple3<String, String, String> tuple = usersContract.getUser(key).send();
-        if (tuple == null) throw new NotFoundException("user not found");
+        if (!isNull.test(tuple)) return null;
         user = new User(tuple.getValue1(), tuple.getValue2(), tuple.getValue3());
         return user;
     }
