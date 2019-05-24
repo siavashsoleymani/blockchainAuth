@@ -30,6 +30,9 @@ public class OTQ {
     @Column(name = "created_at")
     private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
+    @Column(name = "call_back_url")
+    private String callBackUrl;
+
 
     public OTQ() {
     }
@@ -37,6 +40,14 @@ public class OTQ {
     public OTQ(String lid, String companyId) {
         this.lid = lid;
         this.businessId = companyId;
+    }
+
+    public String getCallBackUrl() {
+        return callBackUrl;
+    }
+
+    public void setCallBackUrl(String callBackUrl) {
+        this.callBackUrl = callBackUrl;
     }
 
     public Boolean getDeleted() {

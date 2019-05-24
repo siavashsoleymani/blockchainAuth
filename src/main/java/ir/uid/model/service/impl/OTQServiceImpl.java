@@ -31,12 +31,13 @@ public class OTQServiceImpl implements OTQService {
     }
 
     @Override
-    public LidAndLinkDTO generateQrAndInsertLid(String id, String token, int size) throws IOException, WriterException {
+    public LidAndLinkDTO generateQrAndInsertLid(String id, String token, int size, String callBackUrl) throws IOException, WriterException {
         String lid        = RandomGenerator.getRandomString();
         String qrCodePath = QRGenerator.generateQrCode(lid, size);
         OTQ    otq        = new OTQ();
         otq.setBusinessId(id);
         otq.setLid(lid);
+        otq.setCallBackUrl(callBackUrl);
         otqRepository.save(otq);
         return new LidAndLinkDTO(baseUrl + "/downloadQrCode/" + lid, lid);
     }

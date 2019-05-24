@@ -1,6 +1,5 @@
 package ir.uid.controllers;
 
-import ir.uid.exception.UserNotFoundException;
 import ir.uid.model.entity.User;
 import ir.uid.model.service.impl.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

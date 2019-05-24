@@ -25,11 +25,12 @@ public class QrcodeController {
         this.otqService = otqService;
     }
 
-    @RequestMapping(method = GET, value = "/{businessId}/generateQrCode", params = {"size"})
+    @RequestMapping(method = GET, value = "/{businessId}/generateQrCode", params = {"size", "callBackUrl"})
     public ResponseEntity<LidAndLinkDTO> getQRCode(@PathVariable("businessId") String businessId
             , @RequestParam("size") int size
+            , @RequestParam("callBackUrl") String callBackUrl
             , @RequestHeader("Authorization") String token) throws IOException, WriterException {
-        return new ResponseEntity<>(otqService.generateQrAndInsertLid(businessId, token, size), HttpStatus.OK);
+        return new ResponseEntity<>(otqService.generateQrAndInsertLid(businessId, token, size, callBackUrl), HttpStatus.OK);
     }
 
     @RequestMapping(method = GET, value = "/downloadQrCode/{lid}")

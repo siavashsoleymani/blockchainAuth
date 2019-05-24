@@ -11,11 +11,17 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController()
 public class    UserController {
     @Autowired
-    private UsersServiceImpl userSvc;
+    private UsersServiceImpl usersService;
 
-    @PostMapping("users")
+    @PostMapping("/users")
     public User addUser(String name, String dob, String sex,
                            @RequestParam("file") MultipartFile file) throws Exception {
-        return userSvc.addUser(new User(name, dob, sex), file);
+        return usersService.addUser(new User(name, dob, sex), file);
+    }
+
+    @PostMapping(value = "/users", params = {"lid"})
+    public User getUser(@RequestParam("file") MultipartFile file, @RequestParam("lid") String lid) throws Exception {
+        User user = usersService.getUserWithLid(file, lid);
+        return user;
     }
 }
