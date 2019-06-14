@@ -24,5 +24,6 @@ public class LoginController {
     public ResponseEntity<String> loginUserToBusiness(@RequestBody LidDTO lidDTO) throws Exception {
         loginService.loginUser(lidDTO.getKey(), lidDTO.getLid());
         return new ResponseEntity<>("ok", HttpStatus.OK);
+
     }
 }
