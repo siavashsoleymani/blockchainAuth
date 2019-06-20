@@ -1,15 +1,18 @@
 package ir.uid.model.entity;
 
+import javax.persistence.Transient;
+
 public class User {
     private String name;
-
-    private String family;
 
     private String dob;
 
     private String sex;
 
     private String key;
+
+    @Transient
+    private String lid;
 
 
     public User(String name, String dob, String sex, String key) {
@@ -27,12 +30,12 @@ public class User {
     public User() {
     }
 
-    public String getFamily() {
-        return family;
+    public String getLid() {
+        return lid;
     }
 
-    public void setFamily(String family) {
-        this.family = family;
+    public void setLid(String lid) {
+        this.lid = lid;
     }
 
     public String getKey() {

@@ -98,16 +98,4 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         contractAddress = usersContract.getContractAddress();
         System.out.println(contractAddress + usersContract.isValid());
     }
-
-    public User getUserWithLid(String key, String lid) throws Exception {
-        OTQ otq = otqRepository.findByLid(lid);
-        if (Objects.isNull(otq)) throw new NotFoundException("lid not found");
-        if (!otq.getUserId().equals(key))
-            throw new NotFoundException("no user scanned this");
-        User user = probeUser(key);
-        restTemplate.postForEntity(otq.getCallBackUrl(), user, Object.class);
-        otq.setDeleted(true);
-        otqRepository.save(otq);
-        return user;
-    }
 }

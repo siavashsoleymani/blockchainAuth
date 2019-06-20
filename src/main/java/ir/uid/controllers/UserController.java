@@ -18,10 +18,4 @@ public class    UserController {
     public User addUser(@RequestBody User user) throws Exception {
         return usersService.addUser(user);
     }
-
-    @PostMapping(value = "/users", params = {"lid"})
-    public User getUser(@RequestBody String key, @RequestParam("lid") String lid) throws Exception {
-        User user = usersService.getUserWithLid(key, lid);
-        return user;
-    }
 }

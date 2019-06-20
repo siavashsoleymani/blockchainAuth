@@ -1,16 +1,13 @@
 package ir.uid.util;
 
 import ir.uid.model.entity.User;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
-import java.io.IOException;
 import java.security.Key;
-import java.security.NoSuchAlgorithmException;
 
 @Component
 @Scope("singleton")
@@ -25,8 +22,8 @@ public class Encryptor {
             throw new Exception("bad aes key configured");
         }
         if (aesKey == null) {
-            aesKey = new SecretKeySpec(keyStr.getBytes(), "AES");
-            cipher = Cipher.getInstance("AES");
+            aesKey = new SecretKeySpec(keyStr.getBytes(), "AES/ECB/PKCS5Padding");
+            cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         }
     }
 
