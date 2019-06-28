@@ -37,7 +37,6 @@ public class LoginServiceImpl implements LoginService {
         if (Objects.isNull(byLid)) throw new NotFoundException("lid not found");
         User user = usersService.probeUser(key);
         if (Objects.isNull(user)) throw new UserNotFoundException(env.getProperty("usernotfound"));
-        byLid.setUserId(key);
         byLid.setDeleted(true);
         user.setLid(lid);
         restTemplate.postForEntity(byLid.getCallBackUrl(), user, Object.class);

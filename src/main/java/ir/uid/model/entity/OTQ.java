@@ -22,8 +22,6 @@ public class OTQ {
 
     private String lid;
 
-    private String userId;
-
     @Column(name = "is_deleted")
     private Boolean isDeleted = false;
 
@@ -60,14 +58,6 @@ public class OTQ {
 
     public Boolean isDeleted() {
         return isDeleted;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public Timestamp getCreatedAt() {
