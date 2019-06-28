@@ -3,7 +3,6 @@ package ir.uid.model.service.impl;
 import ir.uid.contracts.Users;
 import ir.uid.exception.NotFoundException;
 import ir.uid.exception.UserAlreadyExistException;
-import ir.uid.model.entity.OTQ;
 import ir.uid.model.entity.User;
 import ir.uid.model.repository.OTQRepository;
 import ir.uid.model.service.ContractService;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.web3j.crypto.Credentials;
 import org.web3j.crypto.WalletUtils;
-import org.web3j.tuples.generated.Tuple3;
+import org.web3j.tuples.generated.Tuple5;
 
 import java.math.BigInteger;
 import java.util.Objects;
@@ -43,7 +42,7 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
 
     private final RestTemplate restTemplate;
 
-    private static final Predicate<Tuple3<String, String, String>> isNull = p -> !p.getValue1().isEmpty() || !p.getValue1().isEmpty() || !p.getValue3().isEmpty();
+    private static final Predicate<Tuple5<String, String, String, String, String>> isNull = p -> !p.getValue1().isEmpty() || !p.getValue1().isEmpty() || !p.getValue3().isEmpty();
 
     @Autowired
     public UsersServiceImpl(Encryptor encryptor,
@@ -65,7 +64,7 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         user.setKey(RandomStringUtils.random(16, true, true));
         checkIfUserExists(user.getKey());
         user = encryptor.encryptUserDatas(user, user.getKey());
-        usersContract.addUser(user.getName(), user.getDob(), user.getSex(), user.getKey())
+        usersContract.addUser(user.getName(),user.getFamily(), user.getEmail(), user.getDob(), user.getSex(), user.getKey())
                 .send();
         return user;
     }
@@ -78,10 +77,10 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
     }
 
     private User getMatchedUserUsingMatcher(String key) throws Exception {
-        User                           user;
-        Tuple3<String, String, String> tuple = usersContract.getUser(key).send();
+        User                                           user;
+        Tuple5<String, String, String, String, String> tuple = usersContract.getUser(key).send();
         if (!isNull.test(tuple)) return null;
-        user = new User(tuple.getValue1(), tuple.getValue2(), tuple.getValue3());
+        user = new User(tuple.getValue1(), tuple.getValue2(), tuple.getValue3(), tuple.getValue4(), tuple.getValue5());
         return user;
     }
 
@@ -96,6 +95,6 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         Credentials credentials    = WalletUtils.loadCredentials("siavash", walletFilePath);
         usersContract = Users.deploy(web3j, credentials, GAS_PRICE, GAS_LIMIT).send();
         contractAddress = usersContract.getContractAddress();
-        System.out.println(contractAddress + usersContract.isValid());
+        System.out.println(contractAddress + "      " + usersContract.isValid());
     }
 }

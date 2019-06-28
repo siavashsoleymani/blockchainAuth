@@ -48,16 +48,20 @@ public class Encryptor {
     }
 
     public User decryptUser(User encryptedUser, String key) throws Exception {
-        encryptedUser.setDob(this.decrypt(encryptedUser.getDob(), key));
         encryptedUser.setName(this.decrypt(encryptedUser.getName(), key));
+        encryptedUser.setFamily(this.decrypt(encryptedUser.getFamily(), key));
+        encryptedUser.setEmail(this.decrypt(encryptedUser.getEmail(), key));
+        encryptedUser.setDob(this.decrypt(encryptedUser.getDob(), key));
         encryptedUser.setSex(this.decrypt(encryptedUser.getSex(), key));
         return encryptedUser;
     }
 
 
     public User encryptUserDatas(User user, String key) throws Exception {
-        user.setDob(this.encrypt(user.getDob(), key));
         user.setName(this.encrypt(user.getName(), key));
+        user.setFamily(this.encrypt(user.getFamily(), key));
+        user.setEmail(this.encrypt(user.getEmail(), key));
+        user.setDob(this.encrypt(user.getDob(), key));
         user.setSex(this.encrypt(user.getSex(), key));
         return user;
     }

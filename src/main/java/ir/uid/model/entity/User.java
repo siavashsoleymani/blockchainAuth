@@ -5,6 +5,10 @@ import javax.persistence.Transient;
 public class User {
     private String name;
 
+    private String family;
+
+    private String email;
+
     private String dob;
 
     private String sex;
@@ -15,14 +19,20 @@ public class User {
     private String lid;
 
 
-    public User(String name, String dob, String sex, String key) {
+    public User(String name, String family, String email, String dob, String sex, String key, String lid) {
         this.name = name;
+        this.family = family;
+        this.email = email;
         this.dob = dob;
         this.sex = sex;
+        this.key = key;
+        this.lid = lid;
     }
 
-    public User(String name, String dob, String sex) {
+    public User(String name, String family, String email, String dob, String sex) {
         this.name = name;
+        this.family = family;
+        this.email = email;
         this.dob = dob;
         this.sex = sex;
     }
@@ -68,6 +78,22 @@ public class User {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getFamily() {
+        return family;
+    }
+
+    public void setFamily(String family) {
+        this.family = family;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
