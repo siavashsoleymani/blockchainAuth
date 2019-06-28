@@ -64,11 +64,19 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         user.setKey(RandomStringUtils.random(16, true, true));
         checkIfUserExists(user.getKey());
         user = encryptor.encryptUserDatas(user, user.getKey());
-        usersContract.addUser(user.getName(),user.getFamily(), user.getEmail(), user.getDob(), user.getSex(), user.getKey())
+        usersContract.addUser(user.getName(), user.getFamily(), user.getEmail(), user.getDob(), user.getSex(), user.getKey())
                 .send();
         return user;
     }
 
+
+    public User editUser(User user) throws Exception {
+        checkIfUserDoesNotExists(user.getKey());
+        user = encryptor.encryptUserDatas(user, user.getKey());
+        usersContract.editUser(user.getName(), user.getFamily(), user.getEmail(), user.getDob(), user.getSex(), user.getKey())
+                .send();
+        return user;
+    }
 
     public User probeUser(String key) throws Exception {
         User encryptedUser = getMatchedUserUsingMatcher(key);
@@ -87,7 +95,11 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
     private void checkIfUserExists(String key) throws Exception {
         User user = getMatchedUserUsingMatcher(key);
         if (user != null) throw new UserAlreadyExistException(env.getProperty("userexists"));
+    }
 
+    private void checkIfUserDoesNotExists(String key) throws Exception {
+        User user = getMatchedUserUsingMatcher(key);
+        if (user == null) throw new UserAlreadyExistException(env.getProperty("usernotexists"));
     }
 
     private void deployContract() throws Exception {
@@ -97,4 +109,5 @@ public class UsersServiceImpl extends ContractService implements InitializingBea
         contractAddress = usersContract.getContractAddress();
         System.out.println(contractAddress + "      " + usersContract.isValid());
     }
+
 }
